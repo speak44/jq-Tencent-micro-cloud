@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/common.css"/>
+	</head>
+	<body>
+		<!--头部内容-->
+		<div class="headzon">
+			<!--头部默认显示内容-->
+			<div class="header clearfix">
+				<div class="logo" >
+					<a href="javascript:;">
+						<img src="img/logo.png"/>
+					</a>
+				</div>
+				<div class="task">
+					<a href="javascript:;" title="文件管理">				
+					</a>
+				</div>
+				<!--搜索框-->
+				<div class="search">
+					<i class="js_seri"></i>
+					<input type="text" name="" id="text" value="" placeholder="请输入内容"/>
+					<em></em>
+				</div>
+				<!--添加框内容事件-->
+				<div class="addition">
+					<span>+&nbsp;添加</span>
+					<div class="add_cont">
+						<em></em>
+						<dl>
+							<dt><img src="img/yun-chuan.png"/></dt>
+							<dd>上传文件</dd>
+						</dl>
+						<dl>
+							<dt><img src="img/yun-wen.png"/></dt>
+							<dd>上传文件夹</dd>
+						</dl>
+						<dl>
+							<dt><img src="img/yun-lix.png"/></dt>
+							<dd>离线下载</dd>
+						</dl>
+						<dl>
+							<dt><img src="img/yun-chj.png"/></dt>
+							<dd>创建文件夹</dd>
+						</dl>
+						<dl>
+							<dt><img src="img/yun-bij.png"/></dt>
+							<dd>添加笔记</dd>
+						</dl>					
+					</div>
+					
+				</div>			
+				<div class="settipx js_setlist">
+					<div class="setlist timerpx js_timer"></div>
+					<div class="setchart azpx js_azpx"></div>
+				</div>				
+				<div class="settype">
+					<div class="setlist js_setli"></div>
+					<div class="setchart js_setch"></div>
+				</div>
+			</div><!--头部默认显示内容-->
+			<!--选中文件显示的头部内容-->
+			<div class="headhide clearfix">
+				<div class="logo" >
+					<a href="javascript:;">
+						<img src="img/logo2.png"/>
+					</a>
+				</div>
+				<div class="cancel">
+					<a href="javascript:;">
+						取消选择
+					</a>
+				</div>
+				<div class="elect">
+					<a href="javascript:;" class="xuceckd">
+						选择了1项
+					</a>
+				</div>
+				<div class="tumblr">
+					<span class="tumspan">...</span>
+					<div class="tuble">
+						<i></i>
+						<ul>
+							<!--<li class='hidydd'>
+								<a href="javascript:;">移动到</a>
+							</li>
+							<li class='hidcmm'>
+								<a href="javascript:;" class="hidccm">重命名</a>
+							</li>
+							<li class='hidbxx'>
+								<a href="javascript:;">移入保险箱</a>
+							</li>-->
+						</ul>						
+					</div>		
+				</div>
+				<ul class="install clearfix">
+					<li>
+						<i></i>
+						<span>分享</span>
+					</li>
+					<li>
+						<i></i>
+						<span>下载</span>
+					</li>
+					<li class="js_haddel">
+						<i></i>
+						<span>删除</span>
+					</li>					
+				</ul>
+				<div class="delhied js_wendelhid js_hhiddelwen">
+					<div class="mask"></div>
+					<div class="delcct js_wedecct">
+						<div class="delhed">
+							<h3>删除文件</h3>
+							<i class="delno"></i>
+						</div>
+						<div class="delcont">
+							<em></em>
+							<div class="tship">
+								<p>确定要删除这个文件夹吗？</p>
+								<p>已删除的文件可以在回收站找到</p>										
+							</div>
+							<div class="delbtn">
+								<a href="javascript:;" class="delok">确定</a>
+								<a href="javascript:;" class="delno">取消</a>									
+							</div>
+						</div>
+					</div>	
+				</div>	
+			</div>
+		</div>	
+		<!--头部结束-->
+		<div class="content clearfix">
+			<div class="cot_left">
+				<!--头像部分-->
+				<div class="cotl_top">
+					<span class="toux"></span>
+					<div class="cotl_t1">
+						<div class="cotlthea">
+							<em></em>
+							<p class="username">用户姓名</p>
+							<p class="usshiy">已使用了:15.38G 总容量:10G</p>
+							<i></i>
+						</div>
+						<ul class="contl-ul">
+							<li>
+								<a href="javascript:;">
+									<span class="viptej">开通会员,尊享特权</span>
+									<em class="luilsaem">开通会员</em>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">
+									<span class="gomrl">购买容量</span>
+									<em class="newali">新</em>
+								</a>
+							</li>
+							<li>
+								<a href="javascript:;">帮助与反馈</a>
+							</li>
+							<li class="lyuliby">
+								<a href="javascript:;">投诉指导</a>
+							</li>
+							<li>
+								<a href="javascript:;">下载客户端</a>
+							</li>
+							<li>
+								<a href="javascript:;">退出登录</a>
+							</li>
+						</ul>
+					</div>
+				</div><!--头部信息-->
+				<div class="cotl_body">
+					<div class="opevip">开通会员</div>
+					<div class="lately">
+						<em></em>
+						<span>最近</span>
+					</div>					
+					<div class="left_min">
+						<div class="lemi_wen">
+							<h3>文件</h3>
+							<ul class="zon_ul">
+								<!--<li>
+									<i></i>
+									<span>全部</span>
+								</li>
+								<li>
+									<i></i>
+									<span>文档</span>
+								</li>
+								<li>
+									<i></i>
+									<span>图片</span>
+								</li>
+								<li>
+									<i></i>
+									<span>视频</span>
+								</li>
+								<li>
+									<i></i>
+									<span>笔记</span>
+								</li>
+								<li>
+									<i></i>
+									<span>音乐</span>
+								</li>-->
+							</ul>
+						</div><!--文件内容-->
+						<div class="lepic_time">
+							<h3>照片</h3>
+							<ul>
+								<li>
+									<i class="lpcitim-ba"></i>
+									<span>时间</span>
+								</li>
+							</ul>
+						</div><!--时间展现-->
+						<div class="lemi_my">
+							<h3>我的</h3>
+							<ul class="lfmy_ul">
+								<li>
+									<i class="lefbaoxx"></i>
+									<span>保险箱</span>
+								</li>
+								<li>
+									<i class="leffenx"></i>
+									<span>分享链接</span>
+								</li>
+								<!--垃圾箱内容-->
+								
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>				
+			<!--右侧内容-->
+			<div class="cot_right">
+				<!--面包屑导航内容渲染-->
+				<div class="crimibo clearfix">
+					<span class="checkall"></span>
+					<em class="wygan"></em>
+					<ul class="cotmbx clearfix">
+						<li><a href="javascript:;">全部</a></li>
+						<!--<li>
+							<i></i>
+							<a href="javascript:;">文档</a>
+						</li>-->
+					</ul>
+				</div>
+				<ul class="zhcoont">
+					<!--<li>
+						<div class="inct clearfix">
+							<span class="cecked"></span>
+							<div class="wencexct clearfix">
+								<em></em>
+								<span class="contwen"></span>
+								<span class="ctwms">文件夹</span>
+								<input type="text" name="" class="wentext" value="" />
+								<div class="conttshi clearfix">
+									<a href="javascript:;"></a>
+									<a href="javascript:;"></a>
+									<a href="javascript:;"></a>
+									<a href="javascript:;"></a>
+									<a href="javascript:;"></a>
+									<a href="javascript:;"></a>								
+								</div>
+								<time>2016-12-22 10:41</time>
+							</div>							
+						</div>
+						<div class="delhied js_wendelhid">
+							<div class="mask"></div>
+							<div class="delcct js_wedecct">
+								<div class="delhed">
+									<h3>删除文件</h3>
+									<i></i>
+								</div>
+								<div class="delcont">
+									<em></em>
+									<div class="tship">
+										<p>确定要删除这个文件夹吗？</p>
+										<p>已删除的文件可以在回收站找到</p>										
+									</div>
+									<div class="delbtn">
+										<a href="javascript:;">确定</a>
+										<a href="javascript:;">取消</a>									
+									</div>
+								</div>
+							</div>	
+						</div>
+					</li>-->
+				</ul>
+				<div class="boxSelect"></div>
+			</div><!--右侧内容-->
+		</div><!--内容部分结束-->
+		<script src="js/jquery-3.2.1.min.js" type="text/javascript"></script>
+		<!--动画添加颜色的jq-->
+		<script src="js/jquery.animate-colors-min.js" type="text/javascript"></script>
+		<!--运动函数-->
+		<script src="js/MTween.js" type="text/javascript"></script>
+		<!--数据信息-->
+		<script src="js/data.js" type="text/javascript"></script>
+		<!--封的函数-->
+		<script src="js/tool.js" type="text/javascript"></script>
+		<!--使用函数-->
+		<script src="js/index.js" type="text/javascript"></script>
+	</body>
+</html>
