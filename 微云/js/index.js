@@ -175,6 +175,8 @@ window.onhashchange=(()=>{
 	chall()
 	//行间重命名事件
 	rename()
+	//全局调用框选
+	boxSelect()
 	
 })
 //右侧内容双击事件

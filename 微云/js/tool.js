@@ -393,7 +393,6 @@ function hedhiddel(){
 //隐藏头部的重名事件
 function hidhcm(){
 	let hidccm=$('.hidccm')
-	console.log(hidccm)
 	hidccm.click(()=>{
 		let wenccc=$('.wen').find('.cecked[onoff=1]')
 		let wen=wenccc.closest('.wen')
@@ -430,19 +429,19 @@ function chall(){
 	let wencek=$('.wen').find('.cecked')
 	checkall.click((ev)=>{
 		let tarev=$(ev.target)
-		if (tarev.data('onoff')){
-			wencek.css({background:''})
+		if (tarev.data('onoff')){			
 			checkall.css({background:''})
 			tarev.data('onoff',false)
 			tarev.attr('onoff','0');
 			wencek.data('onoff',false)
-			wencek.attr('onoff','0');			
+			wencek.attr('onoff','0');
+			wencek.css({background:''})
 			
 			n=0				
 		} else{				
 			checkall.css({background:'#3b93ff url(img/checkright.png) no-repeat center'})
 			wencek.css({background:'#3b93ff url(img/checkright.png) no-repeat center'})			
-			wencek.data('onoff',true)
+			wencek.data('onoff',true);
 			wencek.attr('onoff','1');			
 			tarev.data('onoff',true);
 			tarev.attr('onoff','1');
@@ -605,4 +604,209 @@ function rename(){
 	})
 }
 //全局调用框选
-boxSelect();
+function boxSelect(){
+	//inconbox 指右侧最大的盒子
+	//ic_box 放文件夹的盒子
+	let wen=$('.wen');
+	let wencek=$('.wen').find('.cecked')//单一文件夹的cecked
+	let boxSelect=$('.boxSelect');//是选框
+	let cot_right=$('.cot_right');
+	let left1=cot_right.offset().left;
+	let top1=cot_right.get(0).getBoundingClientRect().top;
+	let right1=left1+cot_right.width();
+	let bottom1=top1+cot_right.height();
+	let arr=[];
+	cot_right.mousedown((ev)=>{
+		ev.preventDefault()
+		let l1 = ev.clientX-left1;
+		let t1 = ev.clientY-top1;		
+		$(document).mousemove((ev)=>{
+			ev.preventDefault();
+			boxSelect.css('display','block')			
+			if (ev.clientX<right1 && ev.clientX>left1 && ev.clientY<bottom1 && ev.clientY>top1) {
+				let l2 = ev.clientX-left1;
+				let t2 = ev.clientY-top1;
+				let w = Math.abs(l1-l2);
+				let h = Math.abs(t1-t2);
+				let l = l1>l2?l2:l1;
+				let t = t1>t2?t2:t1;
+				boxSelect.css({'width':w+'px','height':h+'px','left':l+'px','top':t+'px'})		
+			
+				for(var i=0;i<arr.length;i++){
+					if (arr[i].find('.cecked').data('onoff')) {//选中
+						n--;
+						arr[i].find('.cecked').data('onoff',false);
+						arr[i].find('.cecked').attr('onoff','0');//未选中
+						arr[i].find('.cecked').css('background','')
+					}
+				}
+				arr = [];
+				//每次都是当前被选中的				
+				wen.each((i,e)=>{
+					if (duang(boxSelect,$(e))) {
+						if (!$(e).find('.cecked').data('onoff')) {
+							n++
+							$(e).find('.cecked').data('onoff',true);
+							$(e).find('.cecked').attr('onoff','1');//未选中
+							$(e).find('.cecked').css('background','#3b93ff url(img/checkright.png) no-repeat center')
+							arr.push($(e))
+						}else{
+							arr.push($(e))
+						}
+					}
+				})
+				//判断全选
+				pball()
+				//隐藏头部显示功能
+				headhide()
+				//拖拽事件
+				wen.each((i,e)=>{
+					$(e).mousedown((ev)=>{
+						ev.cancelBubble = true;
+						if(arr.includes($(e))){
+							let nT = ev.clientY-top1;
+							let nL = ev.clientX-left1;
+							//循环每个选中的li，记录按下点到选中li原点的距离
+							for(let i=0;i<arr.length;i++){
+								let pos = arr[i].offset();
+								let liT = pos.top-top1;
+								let liL = pos.left-left1;
+								arr[i].disY = nT-liT;
+								arr[i].disX = nL-liL;
+							}							
+						}//if判断找到arr中有的 $(e)
+						$(document).mousemove((ev)=>{
+//							ev.cancelBubble = true;
+							for (let i=0;i<arr.length;i++) {
+								arr[i].css('opacity',0.5)
+							}
+							//移动时当前鼠标坐标
+							let dT = ev.clientY-top1;
+							let dL = ev.clientX-left1;
+							//让每个li都保持刚才的距离
+							for(let i=0;i<arr.length;i++){
+								let t = dT-arr[i].disY;
+								let l = dL-arr[i].disX;
+								arr[i].css({'top':t+'px','left':l+'px'})
+							}
+						})//document 移动事件
+						$(document).mouseup((ev)=>{
+							let arr1=[];
+							$(document).unbind('mousemove');
+							$(document).unbind('mouseup');
+							
+							for (let i=0;i<arr.length;i++) {
+								if (arr[i].offset().top>arr[i].y || arr.length==wen.length) {
+									arr[i].css({'top':y+'px','left':x+'px','opacity':1})
+									
+								} else{
+									let t=ev.clientY-top1;
+									wen.each((i,e)=>{
+										arr1.push($(e))
+									})
+									for (let i=0;i<arr.length;i++) {
+										if (arr1.includes(arr[i])) {
+											let s=arr1.indexOf(arr[i]);
+											arr1.splice(s,1);
+										}
+									}
+									for (let i=0;i<arr1.length;i++) {
+										let t1=arr1[i].offset().top+arr1[i].innerHeight();
+										var t2=arr1[i].offset().top;
+										if (t<t1 &&t>t2) {
+											let path=arr1[i].data('path');
+											let Data=data;
+											let arr2=path.split('_');
+											for (let i=1;i<arr2.length;i++) {
+												Data=Data[arr2[i]];
+											}
+											Data.child.maxId+=arr.length;
+											for (let i=0;i<arr.length;i++) {
+												let newPath=Data.path+'_child_'+Number(Data.child.maxId-(i+1));
+												let Data1=data; 
+												let arr3=arr[i].data('path').split('_');
+												for (let j=1;j<arr3.length;j++) {
+													Data1=Data1[arr3[j]];
+													Data1.path=newPath;
+												}
+												Data.child[Data.child.maxId-(i+1)]=Data1;
+											}
+											for (let i=0;i<arr.length;i++) {
+												let path1=arr[i].data('path');
+												let arr4=path1.split('_');
+												let Data2=data;
+												let s=arr4[arr4.length-1];
+												if (arr4.length>2) {
+													arr4.splice(arr4.length-2,2);
+													for (let j=1;j<arr4.length;j++) {
+														Data2=Data2[arr4[j]];
+													}
+													delete Data2.child[s];
+													Data2.child.maxId--;
+												} else{
+													delete data[s];
+													data.maxId--;
+												}
+												arr[i].remove()
+												n--;
+											}
+											//设置双击点击事件，改变hash值
+											dbclk()
+											let wencek=$('.wen').find('.cecked')
+											wencek.data('onoff',false)
+											wencek.attr('onoff','0');
+											wencek.css({background:''})
+											n=0
+											//文件夹单一check按钮点击
+											wenchecked()
+											//左侧栏点击事件
+											lefclick()
+											//判断全选
+											pball()
+											//隐藏头部
+											headhide()
+										}
+									}
+								}
+							}														
+						})//document 抬起事件
+						
+					})//每个文件按下
+				})//单一文件按下事件
+				
+			}//if判断条件
+		})
+		$(document).mouseup((ev)=>{
+			$(document).unbind('mousemove');
+			$(document).unbind('mouseup');
+			boxSelect.css('display','none');
+		})
+	})
+	
+}
+//布局转化
+function layout(){
+	let wen=$('.wen')
+	wen.each((i,e)=>{
+		$(e).css({'left':$(e).offset().left+'px','top':$(e).offset().top+'px'})
+		//记录位置
+		$(e).attr({'x':$(e).offset().left,'y':$(e).offset().top})
+		setTimeout(function(){
+			$(e).css('position','absolute')
+		},0)		
+	})
+}
+//检测碰撞
+function duang(obj1,obj2){
+	let pos1 = obj1.offset();
+	let pos1r=pos1.left+obj1.width();
+	let pos1b=pos1.top+obj1.height();
+	let pos2 = obj2.offset();
+	let pos2r=pos2.left+obj2.width();
+	let pos2b=pos2.top+obj2.height();
+	if(pos1r<pos2.left || pos1b<pos2.top || pos1.left>pos2r || pos1.top>pos2b){
+		return false;
+	}else{
+		return true;
+	}
+}

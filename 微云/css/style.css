@@ -387,6 +387,7 @@
 	float: left;
 	height: 695px;
 	width: 1380px;
+	position: relative;
 	/*background: firebrick;*/
 }
 .crimibo{
