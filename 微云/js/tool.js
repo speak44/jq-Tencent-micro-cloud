@@ -63,7 +63,7 @@ function contwen(data){
 					</div>	
 				</div>				
 			`)
-			zhcoont.append(lis)		
+			zhcoont.append(lis)
 		}
 
 	}	
@@ -115,7 +115,6 @@ function newcont(Data,loddata){
 		if ($(e).data('path')==data3.path) {
 			$(e).find('i').attr('style',`background:url(${data3.picnew}) no-repeat center`)}else if(loall.data('path')==data3.path){
 			loall.find('i').attr('style',`background:url(${loddata[0].pic}) no-repeat center`)
-			console.log(i)
 			$(e).find('i').attr('style',`background:url(${loddata[0].child[i].pic}) no-repeat center`)	
 		}else{
 //			if ($(e).data('path')==loddata[0].child[i].path) {
@@ -142,7 +141,7 @@ function newcont(Data,loddata){
 							<em></em>
 							<span class="contwen"></span>
 							<span class="ctwms">${obj[k].name}</span>
-							<input type="text" name="" class="wentext" value=">${obj[k].name}" />							
+							<input type="text" name="" class="wentext" value="${obj[k].name}" />							
 							<div class="conttshi clearfix">
 								<a href="javascript:;" class="w_share"></a>
 								<a href="javascript:;" class="w_down"></a>
@@ -274,11 +273,13 @@ function wenchecked(){
 			evtar.css({background:''})
 			evtar.data('onoff',false)
 			evtar.attr('onoff','0');
+			evtar.closest('.inct').css('background','')
 			n--
 		}else{
 			evtar.css({background:'#3b93ff url(img/checkright.png) no-repeat center'})			
 			evtar.data('onoff',true);
 			evtar.attr('onoff','1');
+			evtar.closest('.inct').css('background','#f5f8fa')
 			n++
 		}
 		headhide()
@@ -316,7 +317,8 @@ function hidqx(){
 		n=0	
 		wencek.css({background:''})
 		wencek.data('onoff',false)
-		wencek.attr('onoff','0');		
+		wencek.attr('onoff','0');
+		wencek.closest('.inct').css('background','')
 		checkall.css({background:''})
 		checkall.data('onoff',false)
 		checkall.attr('onoff','0');		
@@ -420,6 +422,7 @@ function hidhcm(){
 			wenccc.css({background:''})
 			wenccc.data('onoff',false)
 			wenccc.attr('onoff','0');
+			wenccc.closest('.inct').css('background','')	
 			n--
 		})
 	})
@@ -433,6 +436,7 @@ function chall(){
 			checkall.css({background:''})
 			tarev.data('onoff',false)
 			tarev.attr('onoff','0');
+			wencek.closest('.inct').css('background','')				
 			wencek.data('onoff',false)
 			wencek.attr('onoff','0');
 			wencek.css({background:''})
@@ -445,6 +449,7 @@ function chall(){
 			wencek.attr('onoff','1');			
 			tarev.data('onoff',true);
 			tarev.attr('onoff','1');
+			wencek.closest('.inct').css('background','#f5f8fa')			
 			n=wencek.length
 		}		
 		headhide()
@@ -474,10 +479,10 @@ function pball(){
 }
 //单一文件删除按钮
 function wendel(){
-	let w_del=$('.wen').find('.w_del')	
-//	console.log(w_del)
+	let w_del=$('.wen').find('.w_del')
 	w_del.click((ev)=>{
 		let path=$(ev.target.closest('.wen')).data('path')
+		console.log($(ev.target.closest('.wen')).data())
 		let wen=$(ev.target.closest('.wen'))
 		//找到删除文件弹窗
 		let js_wendelhid=$(ev.target.closest('.wen')).find('.js_wendelhid')
@@ -509,7 +514,8 @@ function wentcdel(js_wedecct,js_wendelhid,path,wen){
 		let l=ev.clientX-js_wedecct.offset().left;
 		let maxt=$(document).innerHeight()-js_wedecct.height()
 		let maxl=$(document).innerWidth()-js_wedecct.width()
-		$(document).mousemove((ev)=>{
+		document.addEventListener('mousemove',fndel,true)
+		function fndel(ev){
 			let newt=ev.clientY-t;
 			let newl=ev.clientX-l;
 			if (newt<0) {
@@ -527,8 +533,13 @@ function wentcdel(js_wedecct,js_wendelhid,path,wen){
 			js_wedecct.css({
 				'top':newt+'px','left':newl+'px'
 			})
-		})
+			ev.cancelBubble=true			
+		}
+//		$(document).mousemove((ev)=>{
+//
+//		})
 		$(document).mouseup(()=>{
+			document.removeEventListener('mousemove',fndel,true)
 			$(document).unbind('mousemove');
 		})
 	})
@@ -617,10 +628,13 @@ function boxSelect(){
 	let bottom1=top1+cot_right.height();
 	let arr=[];
 	cot_right.mousedown((ev)=>{
+	
 		ev.preventDefault()
 		let l1 = ev.clientX-left1;
-		let t1 = ev.clientY-top1;		
-		$(document).mousemove((ev)=>{
+		let t1 = ev.clientY-top1;
+		ev.cancelBubble=true
+		document.addEventListener('mousemove',tfn,false)
+		function tfn(ev){
 			ev.preventDefault();
 			boxSelect.css('display','block')			
 			if (ev.clientX<right1 && ev.clientX>left1 && ev.clientY<bottom1 && ev.clientY>top1) {
@@ -638,6 +652,7 @@ function boxSelect(){
 						arr[i].find('.cecked').data('onoff',false);
 						arr[i].find('.cecked').attr('onoff','0');//未选中
 						arr[i].find('.cecked').css('background','')
+						arr[i].find('.inct').css('background','')
 					}
 				}
 				arr = [];
@@ -649,6 +664,7 @@ function boxSelect(){
 							$(e).find('.cecked').data('onoff',true);
 							$(e).find('.cecked').attr('onoff','1');//未选中
 							$(e).find('.cecked').css('background','#3b93ff url(img/checkright.png) no-repeat center')
+							$(e).find('.inct').css('background','#f5f8fa')
 							arr.push($(e))
 						}else{
 							arr.push($(e))
@@ -659,142 +675,17 @@ function boxSelect(){
 				pball()
 				//隐藏头部显示功能
 				headhide()
-				//拖拽事件
-				wen.each((i,e)=>{
-					$(e).mousedown((ev)=>{
-						ev.cancelBubble = true;
-						if(arr.includes($(e))){
-							let nT = ev.clientY-top1;
-							let nL = ev.clientX-left1;
-							//循环每个选中的li，记录按下点到选中li原点的距离
-							for(let i=0;i<arr.length;i++){
-								let pos = arr[i].offset();
-								let liT = pos.top-top1;
-								let liL = pos.left-left1;
-								arr[i].disY = nT-liT;
-								arr[i].disX = nL-liL;
-							}							
-						}//if判断找到arr中有的 $(e)
-						$(document).mousemove((ev)=>{
-//							ev.cancelBubble = true;
-							for (let i=0;i<arr.length;i++) {
-								arr[i].css('opacity',0.5)
-							}
-							//移动时当前鼠标坐标
-							let dT = ev.clientY-top1;
-							let dL = ev.clientX-left1;
-							//让每个li都保持刚才的距离
-							for(let i=0;i<arr.length;i++){
-								let t = dT-arr[i].disY;
-								let l = dL-arr[i].disX;
-								arr[i].css({'top':t+'px','left':l+'px'})
-							}
-						})//document 移动事件
-						$(document).mouseup((ev)=>{
-							let arr1=[];
-							$(document).unbind('mousemove');
-							$(document).unbind('mouseup');
-							
-							for (let i=0;i<arr.length;i++) {
-								if (arr[i].offset().top>arr[i].y || arr.length==wen.length) {
-									arr[i].css({'top':y+'px','left':x+'px','opacity':1})
-									
-								} else{
-									let t=ev.clientY-top1;
-									wen.each((i,e)=>{
-										arr1.push($(e))
-									})
-									for (let i=0;i<arr.length;i++) {
-										if (arr1.includes(arr[i])) {
-											let s=arr1.indexOf(arr[i]);
-											arr1.splice(s,1);
-										}
-									}
-									for (let i=0;i<arr1.length;i++) {
-										let t1=arr1[i].offset().top+arr1[i].innerHeight();
-										var t2=arr1[i].offset().top;
-										if (t<t1 &&t>t2) {
-											let path=arr1[i].data('path');
-											let Data=data;
-											let arr2=path.split('_');
-											for (let i=1;i<arr2.length;i++) {
-												Data=Data[arr2[i]];
-											}
-											Data.child.maxId+=arr.length;
-											for (let i=0;i<arr.length;i++) {
-												let newPath=Data.path+'_child_'+Number(Data.child.maxId-(i+1));
-												let Data1=data; 
-												let arr3=arr[i].data('path').split('_');
-												for (let j=1;j<arr3.length;j++) {
-													Data1=Data1[arr3[j]];
-													Data1.path=newPath;
-												}
-												Data.child[Data.child.maxId-(i+1)]=Data1;
-											}
-											for (let i=0;i<arr.length;i++) {
-												let path1=arr[i].data('path');
-												let arr4=path1.split('_');
-												let Data2=data;
-												let s=arr4[arr4.length-1];
-												if (arr4.length>2) {
-													arr4.splice(arr4.length-2,2);
-													for (let j=1;j<arr4.length;j++) {
-														Data2=Data2[arr4[j]];
-													}
-													delete Data2.child[s];
-													Data2.child.maxId--;
-												} else{
-													delete data[s];
-													data.maxId--;
-												}
-												arr[i].remove()
-												n--;
-											}
-											//设置双击点击事件，改变hash值
-											dbclk()
-											let wencek=$('.wen').find('.cecked')
-											wencek.data('onoff',false)
-											wencek.attr('onoff','0');
-											wencek.css({background:''})
-											n=0
-											//文件夹单一check按钮点击
-											wenchecked()
-											//左侧栏点击事件
-											lefclick()
-											//判断全选
-											pball()
-											//隐藏头部
-											headhide()
-										}
-									}
-								}
-							}														
-						})//document 抬起事件
-						
-					})//每个文件按下
-				})//单一文件按下事件
-				
 			}//if判断条件
-		})
+			ev.cancelBubble=true				
+		}
 		$(document).mouseup((ev)=>{
-			$(document).unbind('mousemove');
+			document.removeEventListener('mousemove',tfn,false)
+//			$(document).unbind('mousemove');
 			$(document).unbind('mouseup');
 			boxSelect.css('display','none');
 		})
 	})
 	
-}
-//布局转化
-function layout(){
-	let wen=$('.wen')
-	wen.each((i,e)=>{
-		$(e).css({'left':$(e).offset().left+'px','top':$(e).offset().top+'px'})
-		//记录位置
-		$(e).attr({'x':$(e).offset().left,'y':$(e).offset().top})
-		setTimeout(function(){
-			$(e).css('position','absolute')
-		},0)		
-	})
 }
 //检测碰撞
 function duang(obj1,obj2){
@@ -809,4 +700,98 @@ function duang(obj1,obj2){
 	}else{
 		return true;
 	}
+}
+//新建文件
+function nmnew(){
+	let newaddwen=$('.newaddwen')
+	newaddwen.click(()=>{
+		let whash=location.hash;
+		let newPath=null;
+		if (whash) {
+			let hash = whash.substr(1).split("=")[1]
+			let  arr = hash.split('/');
+			let Data = data;
+			console.log(Data)
+			for(let i = 1; i < arr.length; i++) {
+				Data = Data[arr[i]];
+			}
+			console.log(Data)
+			Data.child.maxId++;
+			newPath = Data.path + '_child_' + Number(Data.child.maxId - 1);
+			Data.child[Data.child.maxId - 1] = {
+				path: newPath,
+					name: '新建文件夹',
+					child: {
+						maxId: 0
+					}
+			}			
+		} else{
+			data[0].child.maxId++;
+			newPath = "data_0_child_" + Number(data[0].child.maxId - 1);
+			data[0].child[data[0].child.maxId - 1] = {
+				path: newPath,
+				name: '新建文件夹',
+				child: {
+					maxId: 0
+				}
+			}
+		}
+		lis=document.createElement('li')
+		$(lis).data('path',newPath)
+		$(lis).addClass('wen')
+		$(lis).html(`
+			<div class="inct clearfix">
+				<span class="cecked"></span>
+				<div class="wencexct clearfix">
+					<em></em>
+					<span class="contwen"></span>
+					<span class="ctwms">新建文件夹</span>
+					<input type="text" name="" class="wentext" value="新建文件夹" />							
+					<div class="conttshi clearfix">
+						<a href="javascript:;" class="w_share"></a>
+						<a href="javascript:;" class="w_down"></a>
+						<a href="javascript:;" class="w_del"></a>
+						<a href="javascript:;" class="w_remove"></a>
+						<a href="javascript:;" class="w_ren"></a>
+						<a href="javascript:;" class="w_safe"></a>								
+					</div>
+					<time>2016-12-22 10:41</time>
+				</div>							
+			</div>
+			<div class="delhied js_wendelhid">
+				<div class="mask"></div>
+				<div class="delcct js_wedecct">
+					<div class="delhed">
+						<h3>删除文件</h3>
+						<i class="delno"></i>
+					</div>
+					<div class="delcont">
+						<em></em>
+						<div class="tship">
+							<p>确定要删除这个文件夹吗？</p>
+							<p>已删除的文件可以在回收站找到</p>										
+						</div>
+						<div class="delbtn">
+							<a href="javascript:;" class="delok">确定</a>
+							<a href="javascript:;" class="delno">取消</a>									
+						</div>
+					</div>
+				</div>	
+			</div>							
+		`)
+		$(lis).insertBefore(zhcoont.find('li').eq(0))	
+		//单一文件删除按钮
+		wendel()
+		//重绘左侧排版
+		list(data)
+		//左侧点击事件
+		lefclick()
+		//判断全选
+		pball()	
+		//总的全选框按钮的触发事件
+		chall()
+		//重命名
+		rename()
+
+	})
 }
