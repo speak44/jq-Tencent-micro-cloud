@@ -94,6 +94,7 @@ function getdata(data){
 }
 //右侧双击事件后再次渲染页面
 function newcont(Data,loddata){
+	console.log(Data)
 	//全部 的li标签
 	let loall=$('.loall')
 	//全部 内部的li标签
@@ -482,7 +483,6 @@ function wendel(){
 	let w_del=$('.wen').find('.w_del')
 	w_del.click((ev)=>{
 		let path=$(ev.target.closest('.wen')).data('path')
-		console.log($(ev.target.closest('.wen')).data())
 		let wen=$(ev.target.closest('.wen'))
 		//找到删除文件弹窗
 		let js_wendelhid=$(ev.target.closest('.wen')).find('.js_wendelhid')
@@ -704,94 +704,99 @@ function duang(obj1,obj2){
 //新建文件
 function nmnew(){
 	let newaddwen=$('.newaddwen')
+	newaddwen.data('onoff',true)
 	newaddwen.click(()=>{
-		let whash=location.hash;
-		let newPath=null;
-		if (whash) {
-			let hash = whash.substr(1).split("=")[1]
-			let  arr = hash.split('/');
-			let Data = data;
-			console.log(Data)
-			for(let i = 1; i < arr.length; i++) {
-				Data = Data[arr[i]];
-			}
-			console.log(Data)
-			Data.child.maxId++;
-			newPath = Data.path + '_child_' + Number(Data.child.maxId - 1);
-			Data.child[Data.child.maxId - 1] = {
-				path: newPath,
+		if (newaddwen.data('onoff')) {
+			let whash=location.hash;
+			let newPath=null;
+			if (whash) {
+				let hash = whash.substr(1).split("=")[1]
+				let  arr = hash.split('/');
+				let Data = data;
+				for(let i = 1; i < arr.length; i++) {
+					Data = Data[arr[i]];
+				} 
+				console.log(Data)
+				Data.child.maxId++;
+				newPath = Data.path + '_child_' + Number(Data.child.maxId - 1);
+				Data.child[Data.child.maxId - 1] = {
+					path: newPath,
+						name: '新建文件夹',
+						child: {
+							maxId: 0
+						}
+				}			
+			}else{
+				data[0].child.maxId++;
+				newPath = "data_0_child_" + Number(data[0].child.maxId - 1);
+				data[0].child[data[0].child.maxId - 1] = {
+					pic:'img/wenxiao2.png',
+					picnew:'img/wenxiao.png',					
+					path: newPath,
 					name: '新建文件夹',
 					child: {
 						maxId: 0
 					}
-			}			
-		} else{
-			data[0].child.maxId++;
-			newPath = "data_0_child_" + Number(data[0].child.maxId - 1);
-			data[0].child[data[0].child.maxId - 1] = {
-				path: newPath,
-				name: '新建文件夹',
-				child: {
-					maxId: 0
 				}
 			}
-		}
-		lis=document.createElement('li')
-		$(lis).data('path',newPath)
-		$(lis).addClass('wen')
-		$(lis).html(`
-			<div class="inct clearfix">
-				<span class="cecked"></span>
-				<div class="wencexct clearfix">
-					<em></em>
-					<span class="contwen"></span>
-					<span class="ctwms">新建文件夹</span>
-					<input type="text" name="" class="wentext" value="新建文件夹" />							
-					<div class="conttshi clearfix">
-						<a href="javascript:;" class="w_share"></a>
-						<a href="javascript:;" class="w_down"></a>
-						<a href="javascript:;" class="w_del"></a>
-						<a href="javascript:;" class="w_remove"></a>
-						<a href="javascript:;" class="w_ren"></a>
-						<a href="javascript:;" class="w_safe"></a>								
-					</div>
-					<time>2016-12-22 10:41</time>
-				</div>							
-			</div>
-			<div class="delhied js_wendelhid">
-				<div class="mask"></div>
-				<div class="delcct js_wedecct">
-					<div class="delhed">
-						<h3>删除文件</h3>
-						<i class="delno"></i>
-					</div>
-					<div class="delcont">
+			newaddwen.data('onoff',false)
+			lis=document.createElement('li')
+			$(lis).data('path',newPath)
+			$(lis).addClass('wen')
+			$(lis).html(`
+				<div class="inct clearfix">
+					<span class="cecked"></span>
+					<div class="wencexct clearfix">
 						<em></em>
-						<div class="tship">
-							<p>确定要删除这个文件夹吗？</p>
-							<p>已删除的文件可以在回收站找到</p>										
+						<span class="contwen"></span>
+						<span class="ctwms">新建文件夹</span>
+						<input type="text" name="" class="wentext" value="新建文件夹" />							
+						<div class="conttshi clearfix">
+							<a href="javascript:;" class="w_share"></a>
+							<a href="javascript:;" class="w_down"></a>
+							<a href="javascript:;" class="w_del"></a>
+							<a href="javascript:;" class="w_remove"></a>
+							<a href="javascript:;" class="w_ren"></a>
+							<a href="javascript:;" class="w_safe"></a>								
 						</div>
-						<div class="delbtn">
-							<a href="javascript:;" class="delok">确定</a>
-							<a href="javascript:;" class="delno">取消</a>									
+						<time>2016-12-22 10:41</time>
+					</div>							
+				</div>
+				<div class="delhied js_wendelhid">
+					<div class="mask"></div>
+					<div class="delcct js_wedecct">
+						<div class="delhed">
+							<h3>删除文件</h3>
+							<i class="delno"></i>
 						</div>
-					</div>
-				</div>	
-			</div>							
-		`)
-		$(lis).insertBefore(zhcoont.find('li').eq(0))	
-		//单一文件删除按钮
-		wendel()
-		//重绘左侧排版
-		list(data)
-		//左侧点击事件
-		lefclick()
-		//判断全选
-		pball()	
-		//总的全选框按钮的触发事件
-		chall()
-		//重命名
-		rename()
+						<div class="delcont">
+							<em></em>
+							<div class="tship">
+								<p>确定要删除这个文件夹吗？</p>
+								<p>已删除的文件可以在回收站找到</p>										
+							</div>
+							<div class="delbtn">
+								<a href="javascript:;" class="delok">确定</a>
+								<a href="javascript:;" class="delno">取消</a>									
+							</div>
+						</div>
+					</div>	
+				</div>							
+			`)
+			$(lis).insertBefore(zhcoont.find('li').eq(0))	
+			//单一文件删除按钮
+			wendel()
+			//重绘左侧排版
+			list(data)
+			//左侧点击事件
+			lefclick()
+			//判断全选
+			pball()	
+			//总的全选框按钮的触发事件
+			chall()
+			//重命名
+			rename()	
+		}
 
 	})
 }

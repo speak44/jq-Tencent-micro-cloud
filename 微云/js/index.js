@@ -159,7 +159,9 @@ window.onhashchange=(()=>{
 	//面包屑导航生成
 	let arr=getdata2(data)
 	nav(arr)
-	//文件每个的删除按钮
+	//新建文件
+	nmnew()
+	//文件每个的删除按钮	
 	wendel()
 	//右侧内容双击事件
 	dbclk()
@@ -171,8 +173,7 @@ window.onhashchange=(()=>{
 	rinavclick()
 	//文件单一选中的事件
 	wenchecked()
-	//新建文件
-	nmnew()
+
 	//触发全选按钮事件
 	chall()
 	//行间重命名事件
@@ -182,6 +183,8 @@ window.onhashchange=(()=>{
 
 	
 })
+//新建文件
+nmnew()
 //右侧内容双击事件
 dbclk()
 //左侧内容点击事件
@@ -200,5 +203,3 @@ wendel()
 rename()
 //全局调用框选
 boxSelect();
-//新建文件
-nmnew()
