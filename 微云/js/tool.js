@@ -598,6 +598,7 @@ function rename(){
 		wentext.css('display','block')
 		wentext.select()
 		wentext.blur((ev)=>{
+			console.log(1)
 			ctwms.text($(ev.target).val())
 			wentext.css('display','none')
 			let path=wen.data('path')
