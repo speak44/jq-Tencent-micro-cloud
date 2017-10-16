@@ -184,7 +184,7 @@
 	background: #f3f9ff;
 }
 .cot_left{
-	width: 300px;
+	width: 16%;
 	float: left;
 	border-right: 1px solid #e6e7ec;
 }
@@ -386,13 +386,13 @@
 .cot_right{
 	float: left;
 	height: 695px;
-	width: 81%;
+	width: 80%;
 	position: relative;
 	/*background: firebrick;*/
 }
 .crimibo{
 	margin-left: 59px;
-	padding: 33px 0px 28px 0px;
+	padding: 48px 0px 38px 0px;
 	border-bottom: 1px solid #f1f2f4;
 	width: 100%;
 }
@@ -436,6 +436,7 @@
 .cotmbx li a{
 	line-height: 28px;
 	color: #777777;
+	font-size: 22px;
 }
 .zhcoont{
 	width: 100%;
@@ -443,7 +444,7 @@
 .zhcoont li{
 	cursor: pointer;
 	margin-left: 59px;
-	height: 83px;
+	height: 95px;
 	border-bottom: 1px solid #e6e7ec;
 	position: relative;
 	width: 100%;
@@ -452,7 +453,7 @@
 .inct{
 	position: absolute;
 	left: -59px;
-	height: 43px;
+	height: 54px;
 	padding: 21px 0px 19px 59px;
 	width: 100%;	
 }
@@ -574,7 +575,7 @@ time{
 .install{
 	width: 404px;
 	float: right;
-	margin-left: 191px;
+	margin-left: 427px;
 }
 .install li{
 	float: left;
@@ -784,4 +785,155 @@ time{
     opacity: .5;
     display: none;
     z-index: 999;
+}
+/*移动到弹窗样式*/
+.move-popup{
+	top: 0px;
+    left: 0px;
+    position: fixed;
+	width: 100%;
+	height: 100%;
+	z-index: 10000;
+	/*display: none;*/
+}
+.move-mask{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(255, 255, 255);
+    opacity: 0.65;
+}
+.mov-p-cont{
+	position: absolute;
+	width: 540px;
+	height: 552px;
+	border: 1px solid #c8ccd3;
+	box-shadow: 0 1px 4px rgba(0,0,0,.2);
+	background: #FFFFFF;
+}
+.mov-p-c-head{
+	width: 100%;
+	border-bottom:1px solid #C8CCD3 ;
+}
+.mov-p-c-head h3{
+	height: 20px;
+	line-height: 20px;
+	font-size:20px ;
+	font-weight:normal ;
+	padding: 27px 0px 23px 21px;
+	float: left;
+}
+.mov-p-c-head i{
+	width: 13px;
+	height: 13px;
+	float: right;
+	background: url(../img/serno.png) no-repeat center;
+	margin-top: 30px;
+	margin-right: 21px;
+}
+.movp-ccont{
+	width: 470px;
+	height: 414px;
+	padding: 36px 0px 0px 29px;
+}
+.movpc-now{
+	padding-left: 11px;
+	margin-bottom: 21px;
+}
+.movpc-now img{
+	float: left;
+	margin-right: 14px;
+}
+.movpc-now span{
+	font-size: 18px;
+	line-height: 34px;
+}
+.movpc-bge{
+	width: 480px;
+	height: 285px;
+	border:  1px solid #dedede;
+}
+.movpcc-nav{
+	padding: 14px 0px 12px 10px;
+	color: #6c6c6c;
+	font-size: 18px;
+	line-height: 18px;
+	border-bottom: 1px solid #dedede;
+}
+.mpcn-move{
+	float: left;
+	margin-right: 10px;
+}
+.movpcc-nav ul{
+	float: left;
+}
+.movpcc-nav ul li{
+	float: left;
+}
+.movpcc-nav ul li:nth-of-type(1) i{
+	display: none;
+}
+.movrcc-cont{
+	padding-left: 9px;
+	overflow-y: auto;
+}
+.movrcc-cont li:nth-of-type(1){
+	margin-top: 5px;
+}
+/*.movrcc-cont li:hover{
+	background: #ebf5ff;
+}*/
+.movrcc-cont li i{
+	float: left;
+	width: 8px;
+	height: 12px;
+	background: url(../img/move-j1.png) no-repeat center;
+	margin-top: 5px;
+	margin-right: 3px;
+}
+.movrcc-cont li img{
+	float: left;
+	margin-right: 6px;
+}
+.movrcc-cont li a{
+	display: block;
+	margin-bottom: 9px;
+	color: #000;
+}
+.movrcc-cont li span{
+	float: left;
+	line-height: 24px;
+	font-size: 16px;
+	height: 24px;
+}
+.movrcc-cont li ul {
+	margin-left: 22px;
+}
+.movrcc-cont li ul i{
+	background: url(../img/move-j2.png) no-repeat center;
+}
+.movrcc-foot{
+	float: right;
+	margin-top: 29px;
+}
+.movrcc-foot a{
+	float: right;
+	width: 108px;
+	height: 41px;
+	line-height: 41px;
+	font-size: 16px;
+	text-align: center;
+	border-radius: 20px;
+}
+.movrcc-foot a:nth-of-type(1){
+	border: 1px solid #c7c9cf;
+	color: #000;
+}
+.movrcc-foot a:nth-of-type(2){
+	border:  1px solid #94c7fa;
+	background: #94c7fa;
+	color: #fff;
+	margin-right: 11px;
 }

@@ -94,7 +94,6 @@ function getdata(data){
 }
 //右侧双击事件后再次渲染页面
 function newcont(Data,loddata){
-	console.log(Data)
 	//全部 的li标签
 	let loall=$('.loall')
 	//全部 内部的li标签
